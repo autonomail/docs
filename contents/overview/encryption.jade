@@ -1,0 +1,127 @@
+:markdown
+  ## Encryption
+
+  Autonomail protects your email and keeps it private by using well-known industry-standard encryption techniques. But what do we 
+  mean by encryption anyway? In this section we will try and explain how it works as simply as possible.
+
+  ### The basics
+
+  > Encryption is a process of preventing information from being seen by anyone other than the people for whom the information is intended.
+
+  In the context of sending emails it means that when you send an email to somebody only you and the other 
+  person should be able to read what's in that email. Even if somebody else intercepts the email whilst its en route to the recipient 
+  they should not have the ability to read it.
+
+  So how does encryption actually work in practice? Usually it involves taking the information you want to protect (let's call 
+  this _plaintext_) and passing it through a mathematical algorithm to produce some complex-looking output (let's call this _ciphertext_). The 
+  person receiving the message would then pass the ciphertext through the inverse of the original mathematical algorithm to reproduce the 
+  original _plaintext_. 
+
+  For example, let's say we have a simple encryption algorithm which shifts all letters forward by 1. Here is how the process would work:
+
+  1. Alice wishes to send Bob the plaintext `hello`. 
+  1. Alice passes this plaintext through the encryption algorithm _(shift each letter forward by 1)_ to produce the ciphertext `ifmmp`. 
+  1. Alice then sends this ciphertext to Bob. 
+  1. Bob passes the received ciphertext `ifmmp` through the decryption algorithm _(shift each letter back by 1)_ to get the original plaintext `hello`.
+
+  The spy Eve is trying to eavesdrop on Alice and Bob's conversation. Eve knows what encryption algorithm Alice is 
+  using to produce the ciphertext. So she can simply intercept the communication between Alice and Bob and run the same decryption 
+  algorithm Bob is running to get the actual plaintext.
+
+  To get around this Alice and Bob can improve their encryption algorithm. Instead of shifting letters forward by 1 why not shift by any 
+  arbitrary number (let's call this the _encryption key_) which they both agree on beforehand? Let's say they both agree on a key of 3. 
+  Here is how the process will look:
+
+  1. Alice wishes to send Bob the plaintext `hello`. 
+  1. Alice passes this plaintext through the encryption algorithm _(shift each letter forward `key` times)_ to produce the ciphertext `khoor`. 
+  1. Alice then sends this ciphertext to Bob. 
+  1. Bob passes the received ciphertext `khoor` through the decryption algorithm _(shift each letter back `key` times)_ to get the original plaintext `hello`.
+
+  If Eve were to intercept the communication she would need to know the key in order to successfully decrypt the ciphertext. Since 
+  she doesn't she then has to try and guess it, meaning she has try all the possibilities until she gets something which works - this is known 
+  as a _brute force_ search. The level of security provided any good encryption process comes down to how long it would take to brute force the 
+  key even if one has enormous computing power at hand to automate the task. Our simple encryption scheme above is too easy to break, so in 
+  practice most encryption algorithms apply a far more complicated set of mathematical transformations, and use much larger key vlaues 
+  (think numbers on the scale of 2^256 and higher!).
+
+  We're finally left with one problem. How to ensure that Alice and Bob can agree on a key beforehand without 
+  anyone else knowing? They can't really do this over the internet as this communication would itself require encryption to stop Eve from 
+  knowing the key, which would leave them with the same problem of how to securely exchange keys. In an ideal world they would be able to 
+  whisper it to each other in person, in a darkened sound and vibration-proof room. But this really isn't practically feasible. 
+  Luckily there is a different class of encryption algorithms which can help us.
+
+  ### Public key cryptography
+
+  So far we have been talking about what are known as _symmetric_ encryption algorithms. This is where the same encryption key is used to 
+  both encrypt the plaintext and decrypt the ciphertext. But as mentioned before, this leaves us with the problem of how to securely agree 
+  on the key in the first place. 
+
+  In so-called _asymmetric_ or _public key_ encryption algorithms, instead of 1 key there are usually 2. Both keys are 
+  generated together from a mathematical algorithm such that they are mathematically related to each other. Here is the critical point: 
+  **Data encrypted with one of the keys can only be decrypted with the other corresponding key, and vice versa.** Usually one of the keys is 
+  designated as the _private_ key and is kept safe 
+  and secure and never given out. The other key is designated as the _public_ key can is given out to the everyone who wishes to communicate 
+  with you.
+
+  Back to Alice, Bob and Eve, here is the new process:
+
+  1. Alice wishes to send Bob the plaintext `hello`. 
+  1. Alice generates a public and private key pair.
+  1. Alice sends her public key to Bob.
+  1. Alice passes the plaintext through `encryption algorithm + her private key` to produce the ciphertext.
+  1. Alice sends the ciphertext to Bob.
+  1. Bob passes the recieved ciphertext through `decryption algorithm + Alice's public key` to get back the original plaintext `hello`.
+
+  Let's say Eve intercepts step 3, where Alice sends her public key to Bob. If Eve modifies the public key before it reaches the Bob her 
+  modification will be detected later on, as Bob will not be able to decrypt the messages sent to him by Alice. Since Eve does not know 
+  Alice's private key she cannot send fake messages to Bob pretending that they're from Alice. However Eve still knows Alice's public key, 
+  which means she can still decrypt the messages Alice sends out. So to be fully private we need to create a pair of keys for Bob too:
+
+  1. Alice wishes to send Bob the plaintext `hello`. 
+  1. Alice generates a public and private key pair.
+  1. Alice sends her public key to Bob.
+  1. Bob generates a public and private key pair.
+  1. Bob sends his public key to Alice.
+  1. Alice passes the plaintext through `encryption algorithm + her private key + Bob's public key` to produce the ciphertext.
+  1. Alice sends the ciphertext to Bob.
+  1. Bob passes the recieved ciphertext through `decryption algorithm + Alice's public key + his private key` to get back the original plaintext `hello`.
+
+  Now Eve can no longer decrypt the message sent from Alice to Bob because she does not know Bob's private key. She also cannot decrypt 
+  messages sent from Bob back to Alice since she does not know Alice's private key. She can't fake messages to either Alice or Bob because, 
+  again, she does not know their private keys. And if Eve were to modify the public keys as they are being communicated between Alice and Bob 
+  these modifications would get detected later on. 
+
+  There is still a problem. In step 5 above, Eve could prevent Bob's key from getting through. Instead she could generate her own key pair
+   and send the 
+  public key to Alice, pretending that it's from Bob. Eve would then be able to decrypt messages sent from Alice to Bob, as such:
+
+  1. Alice wishes to send Bob the plaintext `hello`. 
+  1. Alice generates a public and private key pair.
+  1. Alice sends her public key to Bob.
+  1. Bob generates a public and private key pair.
+  1. Bob sends his public key to Alice, but Eve intercepts and instead send her own public key to Alice, pretending to be from Bob.
+  1. Alice passes the plaintext through `encryption algorithm + her private key + Eve's public key` to produce the ciphertext.
+  1. Alice sends the ciphertext to Bob, but Eve intercept this.
+  1. Eve passes the recieved ciphertext through `decryption algorithm + Alice's public key + her private key` to get back the original plaintext `hello`.
+  1. Eve does an evil laugh.
+
+  To minimize the risk of this happening it is essential that when receiving someone's public key for the first time you double check to make 
+  sure that it is indeed their public key and not someone else's. This is why Autonomail will ask for confirmation before importing a 
+  someone else's public key into your [secure datastore](/#docs/client/secure-data). Of course, you can always change your mind later on 
+  and remove it.
+
+  You now have a basic understanding of how email encryption works, and more importantly why it works. To summarize:
+
+  > In order for two people to communicate  with each other in private without anybody eavesdropping they both need to generate a key pair and exchange public keys with each other. 
+
+  ## Technical details
+
+  Autonomail uses PGP encryption based on the [OpenPGP standard](). The specific implementation used is an [Emcripten port of GPG2](). The 
+  random data generator is seeded with output from the [Fortuna PRNG]() implementation in [SJCL](http://bitwiseshiftleft.github.io/sjcl/). 
+  The entropy sources for this include 
+  `window.getRandom()`, mouse movements and keyboard strokes.
+
+
+
+
+

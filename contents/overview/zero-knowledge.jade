@@ -1,0 +1,19 @@
+:markdown
+  ## Zero-knowledge system 
+
+  Autonomail uses a [Zero-knowledge proof](http://en.wikipedia.org/wiki/Zero-knowledge_proof)-based authentication system. What this means is 
+  that **your password is never stored or sent to our server**. Even if our server is compromised your password will 
+  not be. 
+
+  This has implications for other aspects of our service. For instance we do not provide a web-based login page as it is very difficult to 
+  ensure that Javascript downloaded by your browser when you load a page from the internet hasn't been maliciously tampered with. This 
+  is a [general problem with cryptography in Javascript](http://www.matasano.com/articles/javascript-cryptography/). 
+
+  We use [encryption keys](/#docs/overview/encryption) derived from your password to protect your emails. So if you happen to forget it then you will not be able to read 
+  previously sent and received encrypted emails. However, you will be able to reset your password and still access your account. Once you're 
+  back in you will be able to create new encryption keys based on your new password and continue using our service.
+
+  ### Technical details
+
+  We use the [Secure Remote Password](http://srp.stanford.edu/design.html) protocol for zero-knowledge authentication. The implementation 
+  we use is provided by [SJCL](http://bitwiseshiftleft.github.io/sjcl/).
