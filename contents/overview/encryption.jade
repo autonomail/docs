@@ -106,15 +106,18 @@
   1. Eve does an evil laugh.
 
   To minimize the risk of this happening it is essential that when receiving someone's public key for the first time you double check to make 
-  sure that it is indeed their public key and not someone else's. This is why Autonomail will ask for confirmation before importing a 
-  someone else's public key into your [secure datastore](/#docs/client/secure-data). Of course, you can always change your mind later on 
-  and remove it.
+  sure that it is indeed their public key and not someone else's. This is why Autonomail will ask for confirmation before using someone else's 
+  public key.
+
+  Autonomail stores your generated keys within a _keychain_. This local storage system also contains the public keys for people you have 
+  communicated with. When a new public key gets sent to you Autonomail will prompt you to 'import' this new key into your keychain. Your 
+  keychain itself is kept secure within your [secure datastore](/#docs/client/secure-data). 
 
   You now have a basic understanding of how email encryption works, and more importantly why it works. To summarize:
 
   > In order for two people to communicate  with each other in private without anybody eavesdropping they both need to generate a key pair and exchange public keys with each other. 
 
-  ## Technical details
+  ### Technical details
 
   Autonomail uses PGP encryption based on the [OpenPGP standard](). The specific implementation used is an [Emcripten port of GPG2](). The 
   random data generator is seeded with output from the [Fortuna PRNG]() implementation in [SJCL](http://bitwiseshiftleft.github.io/sjcl/). 
