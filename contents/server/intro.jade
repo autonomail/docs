@@ -3,16 +3,23 @@
 
   The bulk of the security and privacy features in Autonomail are contained within our open source [client app](/#docs/client). So you 
   don't really 
-  need to trust our server. Having said that we do as much as we can server-side to ensure your privacy and security:
+  need to trust our server. Having said that we do as much as we can server-side to ensure your privacy and security.
 
-  * All communication with our server takes place over [SSL]() with [Perfect Forward Secrecy]() enabled, the most cutting-edge combination 
-  available today. You can view an [live report on our server connection security]() and see for yourself.
-  * Sometimes the person you are communicating with does not have email encryption enabled, in which case your email privacy cannot be 
+  All communication with our server takes place over TLS/SSL with [Perfect Forward 
+  Secrecy](http://vincent.bernat.im/en/blog/2011-ssl-perfect-forward-secrecy.html) enabled, the most cutting-edge combination 
+  available today. You can view an [live report on our server connection security](https://www.ssllabs.com/ssltest/analyze.html?d=hiddentao.com) 
+  and see for yourself.
+
+  Sometimes the person you are communicating with does not have email encryption enabled, in which case your email privacy cannot be 
   guaranteed (read our [encryption guide](/#docs/overview/encryption) to see why). However we still do what we can to ensure that 
   even we cannot read your messages:
-    * All incoming email - i.e. email sent to you by other people - is automatically encrypted with your public key prior to being saved to 
+
+  * All incoming email - i.e. email sent to you by other people - is automatically encrypted with your public key prior to being saved to 
   your inbox.
-    * All outgoing email - i.e. email you send to others - is automatically encrypted with your public key prior to being saved to your 
+  * All outgoing email - i.e. email you send to others - is automatically encrypted with your public key prior to being saved to your 
     'sent mail' folder.
 
-  
+  What to read next:
+
+  * A brief look at our [email protocol](/#docs/server/email-protocol).
+

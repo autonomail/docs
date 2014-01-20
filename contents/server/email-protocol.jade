@@ -3,13 +3,15 @@
 
   Autonomail communicates with other email servers using standard email protocols such as SMTP. However, the connection between the client 
   app running on the user's device and the Autonomail server does not operate according
-  to traditional email protocols - [IMAP]() and [POP]() - as these were originally designed for older times when most internet access 
-  happened over dial-up model connections. Autonomail instead build upon HTTP, the protocol used for web browsing. This 
+  to traditional email protocols - [IMAP](http://en.wikipedia.org/wiki/Internet_Message_Access_Protocol) and 
+  [POP](http://en.wikipedia.org/wiki/Post_Office_Protocol) - as these were 
+  originally designed for older times when most internet access 
+  happened over dial-up model connections. 
+
+  Autonomail instead builds upon [REST](http://en.wikipedia.org/wiki/Representational_state_transfer). This 
   allows us to design a clean, fast protocol without any legacy elements and also make it easy for us to implement and test our protocol from a 
   software development point-of-view. Note that some other providers - such as Gmail - also work primarily with HTTP rather than traditional 
-  email protocols so we are not really breaking new ground here.
+  email protocols.
 
-  ### Technical details
-
-  The Autonomail client app calls REST APIs exposed by the server for everything it needs to do, whether it managing emails or managing a user's 
-  account. We may introduce the use of Websockets to make this communication even smoother.
+  
+  
