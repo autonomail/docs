@@ -2,4 +2,4 @@ This repository contains the documentation for the Autonomail.com website and se
 
 ## LICENSE
 
-Copyright (C) 2014 [Ramesh Nair](http://hiddentao.com). All Rights Reserved.
+Creative Commons Attribution-ShareAlike 4.0 International (http://creativecommons.org/licenses/by-sa/4.0/)
