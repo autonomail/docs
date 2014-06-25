@@ -4,7 +4,7 @@ But we still do everything can to secure our servers and ensure they don't get c
 
 All our servers run up-to-date versions of Ubuntu Linux (a solid open source operating system) and are firewalled to prevent unwanted intrusions. We monitor them 24/7 to ensure that they are functioning properly.
 
-We use industry-grade encryption to ensure that no one can eavesdrop on your communication with our servers. 
+We use industry-grade encryption to ensure that no one can eavesdrop on your communication with our servers. You will see that our website URL has a `https://` prefix and your browser will most probably display a padlock symbol to you to indicate that the connection is secure.
 
 Our email servers are located in countries well known for their [strict data privacy laws](http://nomadcapitalist.com/2013/12/15/top-5-best-countries-host-website-data-privacy/) so that law enforcement agencies and governments cannot access any data without formally obtained legal warrants.
 

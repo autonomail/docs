@@ -1,10 +1,14 @@
 > "Only in a realm where we’re not being watched can we really test the limits of who we want to be. It’s really in the private realm where dissent, creativity and personal exploration lie.” - _Glenn Greenwald_
 
-We have designed our system and service to protect your email privacy as much as possible. We do not scan your email to build up a profile of you. We do not serve you adverts.
+We have designed our system and service to protect your email privacy as much as possible. 
 
-However, true anonymity online is very difficult to achieve due to how easy it is to track information flow across the internet. 
+Many other webmail providers will store your email unencrypted on their servers, leaving its content accessible to anyone who has access to their servers.
 
-The internet email protocol - as it stands today - was not designed with anonymity or privacy in mind. This being said, there are steps one can take to maximize one's privacy and minimize the chance of one's identity being revealed. 
+Furthermore, free webmail providers often need to be able to read your email messages in order to build up a profile of who you are in order to serve you adverts. 
+
+Autonomail does not do this. We do not scan your email to build up a profile of you. We do not serve you adverts. 
+
+Put you don't need to trust what we say. Simply ensure that all the email you send and receive is encrypted - no one will be able to read your emails but you.
 
 ### Insist on encryption when communicating with others
 
@@ -18,7 +22,10 @@ Autonomail or an equivalent OpenPGP-supporting email system, the more you can pr
 
 ### Access the internet through an anonymizing proxy
 
-Normally when you access a website it can use your IP address to track down your geographical location and figure out which Internet Service Provider (ISP) knows who you really are. 
+Normally when you access a website it can use your IP address to track down your geographical 
+location and figure out which Internet Service Provider (ISP) knows who you really are. 
+
+True anonymity online is very difficult to achieve due to how easy it is to track information flow across the internet. The internet email protocol - as it stands today - was not designed with anonymity or privacy in mind. 
 
 Anonymizing proxies such as [Tor](https://www.torproject.org/) enable you to hide your geographical location whilst at the same time contribute computing power and bandwidth to a global network which enables the kind of free speech that a surveillance state threatens.
 
