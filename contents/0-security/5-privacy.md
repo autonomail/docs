@@ -1,6 +1,4 @@
-````
-"Only in a realm where we’re not being watched can we really test the limits of who we want to be. It’s really in the private realm where dissent, creativity and personal exploration lie.” - Glenn Greenwald
-````
+> "Only in a realm where we’re not being watched can we really test the limits of who we want to be. It’s really in the private realm where dissent, creativity and personal exploration lie.” - _Glenn Greenwald_
 
 We have designed our system and service to protect your email privacy as much as possible. We do not scan your email to build up a profile of you. We do not serve you adverts.
 
